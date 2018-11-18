@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="jumbotron" align="center">
+    <h1>Contact Us</h1>
+  </div>
+  <div class="success" [hidden]="hideSuccess" align="center">
+    <img src="../../../assets/success.png" height="50" width="50">
+    <h1>Success..!</h1>
+    <button type="button" class="btn btn-primary" (click)="hideSuccess = !hideSuccess">Close</button>
+  </div>
+  <div class="fail" [hidden]="hideFail" align="center">
+    <img src="../../../assets/fail.png" height="50" width="50">
+    <h1>Failure..!</h1>
+    <button type="button" class="btn btn-primary" (click)="hideFail = !hideFail">Close</button>
+  </div>
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" method="post" novalidate>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email />
+            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+              <div *ngIf="email.errors.required">Email is required</div>
+              <div *ngIf="email.errors.email">Please enter a valid email address</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" class="form-control" name="subject" [(ngModel)]="model.subject" #subject="ngModel" [ngClass]="{ 'is-invalid': f.submitted && subject.invalid }" required />
+            <div *ngIf="f.submitted && subject.invalid" class="invalid-feedback">
+              <div *ngIf="subject.errors.required">Subject is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea class="form-control" cols="2" rows="5" name="message" [(ngModel)]="model.message" #message="ngModel" [ngClass]="{ 'is-invalid': f.submitted && message.invalid }" required></textarea>
+            <div *ngIf="f.submitted && message.invalid" class="invalid-feedback">
+              <div *ngIf="message.errors.required">Message is required</div>
+            </div>
+          </div>
+          <div class="form-group" align="center">
+            <button class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="overlay" [hidden]="hideSuccess"></div>
+<div class="overlay" [hidden]="hideFail"></div>
